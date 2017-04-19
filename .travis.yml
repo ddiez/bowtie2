@@ -1,0 +1,14 @@
+services:
+  - docker
+
+install:
+  - docker build -t ddiez/bowtie2 .
+
+script:
+  - docker run ddiez/bowtie2 bowtie2 -h
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+      docker push ddiez/bowtie2;
+    fi
