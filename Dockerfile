@@ -11,6 +11,7 @@ RUN apt-get update -y && \
       libreadline6-dev \
       zlib1g-dev \
       libtinfo-dev \
+      python \
       && \
 
     # checkout github project and tag.
