@@ -20,10 +20,6 @@ RUN apt-get update -y && \
     cd bowtie2 && \
     git checkout $VERSION && \
 
-    # make /opt install directory.
-    #sed -e "s/prefix = \/usr\/local/prefix = \/opt/" Makefile > Makefile.new && \
-    #mv Makefile.new Makefile && \
-
     # build and install.
     EXTRA_FLAGS="-std=gnu++98" NO_TBB=0 make && \
     make prefix=/opt install && \
@@ -39,7 +35,6 @@ RUN apt-get update -y && \
 
 ENV PATH /opt/bin:$PATH
 
-# User.
 RUN useradd -ms /bin/bash biodev
 RUN echo 'biodev:biodev' | chpasswd
 USER biodev
