@@ -1,7 +1,7 @@
 FROM debian:testing
 LABEL maintainer Diego Diez <diego10ruiz@gmail.com>
 
-ENV VERSION=v2.3.1
+ENV VERSION=v2.3.2
 
 RUN apt-get update -y && \
     apt-get install -y \
