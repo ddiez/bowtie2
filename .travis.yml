@@ -11,4 +11,7 @@ after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
       docker push ddiez/bowtie2;
+      VERSION=`docker run ddiez/bowtie2 printenv VERSION`;
+      docker tag ddiez/bowtie2 ddiez/bowtie2:$VERSION;
+      docker push ddiez/bowtie2:$VERSION;
     fi
