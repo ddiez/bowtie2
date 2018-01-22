@@ -1,7 +1,7 @@
 FROM debian:testing
 LABEL maintainer Diego Diez <diego10ruiz@gmail.com>
 
-ENV VERSION=v2.3.2
+ENV VERSION=v2.3.4
 
 RUN apt-get update -y && \
     apt-get install -y \
@@ -12,19 +12,14 @@ RUN apt-get update -y && \
       zlib1g-dev \
       libtinfo-dev \
       python \
+      libsys-hostname-long-perl \
       && \
-
-    # checkout github project and tag.
     cd /tmp && \
     git clone https://github.com/BenLangmead/bowtie2.git && \
     cd bowtie2 && \
     git checkout $VERSION && \
-
-    # build and install.
     EXTRA_FLAGS="-std=gnu++98" NO_TBB=0 make && \
     make prefix=/opt install && \
-
-    # clean up.
     rm -rf /tmp/bowtie2 && \
     apt-get clean -y && \
     apt-get purge -y \
